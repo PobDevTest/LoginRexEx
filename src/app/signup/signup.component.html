@@ -122,10 +122,18 @@
                         id="confirmPassword" 
                         placeholder="Confirm Password"
                         formControlName="confirmPassword"
-                        [ngClass]="{ 'is-invalid': submitted && formFieldsGetter.confirmPassword.errors }">
-                        <div *ngIf="submitted && formFieldsGetter.confirmPassword.errors" class="invalid-feedback">
-                            <div *ngIf="formFieldsGetter.confirmPassword.errors.required">Resubmit password</div>
-                        </div>
+                        [ngClass]="signupForm.controls['confirmPassword'].invalid ? 'is-invalid' : ''">
+                        
+            <label class="text-danger" *ngIf="signupForm.controls['confirmPassword'].hasError('required')">
+              Password is Required!
+            </label>
+            <label class="text-danger" *ngIf="signupForm.controls['confirmPassword'].hasError('NoPassswordMatch')">
+              Password do not match
+            </label>
+          </div>
+          <div class="form-group">
+            <button [disabled]="signupForm.invalid" type="submit" class="btn btn-primary btn-block font-weight-bold">Sign
+              up</button>
                     </div>
                 </div>
 
